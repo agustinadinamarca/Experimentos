@@ -1,0 +1,2 @@
+Experimento que consiste en la negociación entre 4 agentes (2 argumentos epistémicos y 3 argumentos prácticos
+como máximo cada uno). Se dejó k_turnos=1 y se varíó k_inicial entre 0 y 8.
