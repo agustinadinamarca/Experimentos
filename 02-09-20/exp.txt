@@ -1,0 +1,39 @@
+Number of agents: 4
+Name: Ag2
+Goals: {('g1', 0.64), ('g2', 0.46)}
+Alternatives: {'X1', 'X2'}
+Candidates decisions preferred order: ['prefOrder', ['X1', 'X2']]
+Practical Arguments:
+{('g', 'g1', 0.61), ('-j', 0.43), ('-j', 'g', 0.25)} g1 X2 <class 'arguments.ArgPRO'> 0.25
+{('-g', 'h', 0.91), ('h', 'g2', 0.68), ('-g', 0.64)} g2 X1 <class 'arguments.ArgPRO'> 0.36
+Epistemic Arguments:
+{('a', 'i', 0.31), ('b', 'a', 0.97), ('b', 0.45)} i <class 'arguments.ArgEp'>
+Name: Ag1
+Goals: {('g1', 0.21), ('g2', 0.1)}
+Alternatives: {'X1', 'X2'}
+Candidates decisions preferred order: ['prefOrder', ['X2', 'X1']]
+Practical Arguments:
+{('b', 'g2', 0.47), ('j', 'b', 0.9), ('j', 0.73)} g2 X2 <class 'arguments.ArgPRO'> 0.47
+{('-g', 'g1', 0.15), ('d', '-g', 0.57), ('d', 0.76)} g1 X1 <class 'arguments.ArgPRO'> 0.15
+Epistemic Arguments:
+{('-h', 0.46), ('g', 'd', 0.38), ('-h', 'g', 0.56)} d <class 'arguments.ArgEp'>
+Name: Ag4
+Goals: {('g1', 0.8), ('g2', 0.25)}
+Alternatives: {'X1', 'X2'}
+Candidates decisions preferred order: ['prefOrder', ['X2', 'X1']]
+Practical Arguments:
+{('-d', 0.75), ('-d', 'e', 0.31), ('e', 'g2', 0.26)} g2 X2 <class 'arguments.ArgPRO'> 0.2
+{('d', 'g1', 0.59), ('-e', 0.33), ('-e', 'd', 0.66)} g1 X2 <class 'arguments.ArgCON'> 1
+{('-j', 0.54), ('c', 'g2', 0.21), ('-j', 'c', 0.28)} g2 X1 <class 'arguments.ArgCON'> 1
+Epistemic Arguments:
+{('-a', 0.41), ('-a', '-f', 0.41), ('-f', '-b', 0.53)} -b <class 'arguments.ArgEp'>
+Name: Ag3
+Goals: {('g1', 0.66), ('g2', 0.57)}
+Alternatives: {'X1', 'X2'}
+Candidates decisions preferred order: ['prefOrder', ['X2', 'X1']]
+Practical Arguments:
+{('-f', 0.5), ('b', 'g1', 0.38), ('-f', 'b', 0.2)} g1 X2 <class 'arguments.ArgPRO'> 0.2
+{('-i', 'g2', 0.78), ('g', '-i', 0.75), ('g', 0.12)} g2 X2 <class 'arguments.ArgPRO'> 0.12
+{('-e', 'g2', 0.91), ('-g', '-e', 0.79), ('-g', 0.36)} g2 X1 <class 'arguments.ArgCON'> 1
+Epistemic Arguments:
+{('e', '-a', 0.9), ('-h', 'e', 0.36), ('-h', 0.9)} -a <class 'arguments.ArgEp'>
