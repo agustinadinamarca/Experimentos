@@ -1,0 +1,308 @@
+---
+title: "Notebook de resultados"
+date: "01/09/20"
+output: html_notebook
+---
+
+
+### Pregunta 4 setup experimental
+
+- ¿Acaso para un nivel de Resource Boundedness (RB) fijo, cambiar de cautiosness (RI) a bullshit (R) afecta la calidad de la decision? ¿Para bien o para mal? ¿Aparece una tendencia? 
+
+- **Hipótesis**: Pasar de RI a R siempre deteriora la decisión. 
+
+
+**Parámetros**
+
+- **N**: número de agentes con semántica R (bullshiters)
+- **N_i**: número de agentes con semántica RI (overcautious)
+
+- **K_i**: nivel de resource boundedness inicial (i.e., número de relaciones de ataque que puede procesar un agente antes de empezar el diálogo)
+- **K_t**: nivel de resource boundedness en los turnos (i.e., número de relaciones de ataque que puede procesar un agente en cada turno del diálogo)
+
+- **O_t**: orden de turnos de diálogo posibles
+- **O_s**: orden de speech acts possibles
+
+- **P_i**: distribución de preferencias
+- **A_i**: distribución de argumentos
+
+**Métrica**
+
+Usaremos la métrica d para evaluar la calidad del consenso (que puede tomar valores entre 0 y 2. Esta métrica toma el promedio de los valores obtenidos en todos los diálogos simulados para cada situación (i.e., variando O_t y O_s). En este contexto:
+
+*  0== es el dMax (el valor máximo de la métric) y representa que se alcanzó un agreement
+*  2== es dMin (el valor mínimo de la métrica) y representa que **NO** se alcanzó ningún agreement (failure)
+*  [0,1:2,9]== todos estos valores indican la distáncia a la que quedó el resultado de la negociación respecto a dMax o dMin (i.e., respecto a 0==Agrement o 2==Failure). De esta manera un valor de 0,4 representaría que alcanzaron un acuerdo que está muy cerca del óptimo (dMax), mientras que un valor de 1,80 representaría que fue muy difícil alcanzar el acuerdo y que la calidad de este es muy baja (dMin).
+
+Así, demostraremos que la tendencia planteada en la hipótesis se manifiesta cuando **para diferentes niveles de K (i.e, K_i y/o K_t), d va incrementando de valor (i.e., desde 0 hasta 2) a medida que la población de agentes va mutando de semántica RI hasta semántica R** terminando con una población entera de agentes bullshiters (R).
+
+
+
+### Experimento 1  (K_t==1 y K_i==0,4,8)
+
+(https://github.com/agustinadinamarca/Experimentos/tree/master/02-09-20)
+
+* Número de agentes= 4
+* Número de argumentos para cada agente= (Max) 2 argumentos epistémicos y 3 argumentos práctico
+* K_i= 0, 4, 8
+* K_t= 1
+* Para todos los agentes con diferentes niveles de K_i (0,4,8) generamos un **heatmap** con la variable NumAgR en el eje X, la variable kInitial en el eje Y y rellenamos (fill) con la métrica que es la variable Davg. 
+
+* NumAgR= Número de agentes con semántica R
+* Davg= Promedio de métrica d
+* K_i= RB relaciones de ataque que puede computar antes del diálogo
+* K_t= RB relaciones de ataque que puede computar en cada turno
+
+
+
+```{r}
+library("gridExtra") 
+grid.arrange(plot1, plot1_1, plot1_2, ncol = 3)
+
+```
+
+
+```{r}
+data.frame(results)
+df1 <- data.frame (results)
+df2 <- data.matrix (df1)
+library("ggplot2")
+plot1 <-ggplot(data=df1, aes(x=NumAgR, y=kInitial, fill=Davg)) +
+         scale_y_discrete(limits= c(0,8))+
+         geom_tile()
+print (plot1)
+```
+```{r}
+data.frame(results)
+df1 <- data.frame (results)
+df2 <- data.matrix (df1)
+library("ggplot2")
+plot1_1<-  ggplot(data=df1 , aes(x=NumAgR, y=Davg)) +
+  geom_point(data=df1 , aes(x=NumAgR, y=Davg))+
+      geom_smooth(data=df1, aes(x=NumAgR, y=Davg), fill="blue",
+        colour="darkblue", size=1) +
+   scale_y_continuous(trans = "reverse", breaks = unique(results$position))
+print(plot1_1)
+```
+
+
+```{r}
+data.frame(results)
+
+
+library("tidyverse")
+my_data <- as_tibble(results)
+my_data %>% filter(kInitial == 0)
+dfKi0 <- my_data %>% filter(kInitial == 0)
+
+
+my_data %>% filter(kInitial == 4)
+dfKi4 <- my_data %>% filter(kInitial == 4)
+
+my_data %>% filter(kInitial == 8)
+dfKi8 <- my_data %>% filter(kInitial == 8)
+
+
+library ("ggplot2")
+library("dplyr")
+
+plot1_2 <-ggplot() +
+      # dfKi0
+  geom_point(data=dfKi0 , aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKi0, aes(x=NumAgR, y=Davg), fill="blue",
+        colour="darkblue", size=1) +
+      # dfKi4
+      geom_point(data=dfKi4, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKi4, aes(x=NumAgR, y=Davg), fill="red",
+        colour="red", size=1) +
+# dfKi8
+      geom_point(data=dfKi8, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKi8, aes(x=NumAgR, y=Davg), fill="green",
+        colour="green", size=1) +
+  
+  scale_y_continuous(trans = "reverse", breaks = unique(results$position))
+
+print(plot1_2)
+```
+
+### Experimento 1 dataset 2 (comparación de los contextos con datos nuevos)
+
+```{r}
+library("gridExtra") 
+grid.arrange(plot1, plot2, ncol = 2)
+
+```
+
+```{r}
+library("gridExtra") 
+grid.arrange(plot1_1, plot2_1, ncol = 2)
+```
+```{r}
+library("gridExtra") 
+grid.arrange(plot1_2, plot2_2, ncol = 2)
+```
+
+### Experimento 2 (K_t==0,1,2 y K_i==0,4,8)
+
+```{r}
+library("gridExtra") 
+grid.arrange(plot1, plotk_t1, plotk_t2, plotkt0_1, plotkt1_1, plot3_2, ncol = 3 )+
+scale_y_discrete(limits= c(0,8))
+```
+
+
+### K_t==00 (con todos valores de K_i)
+
+
+```{r}
+data.frame(dfKt0)
+df5 <- data.frame (dfKt0)
+df6 <- data.matrix (df5)
+library("ggplot2")
+plot1 <-ggplot(data=df5, aes(x=NumAgR, y=kInit, fill=Davg)) +
+         scale_y_discrete(limits= c(0,8))+
+         geom_tile()
+print (plot1)
+```
+
+```{r}
+data.frame(dfKt0)
+
+library("tidyverse")
+my_data <- as_tibble(dfKt0)
+
+my_data %>% filter(kInit == 0)
+dfKt0i0 <- my_data %>% filter(kInit == 0)
+
+my_data %>% filter(kInit == 4)
+dfKt0i4 <- my_data %>% filter(kInit == 4)
+
+my_data %>% filter(kInit == 8)
+dfKt0i8 <- my_data %>% filter(kInit == 8)
+
+library ("ggplot2")
+library("dplyr")
+plotkt0_1<-ggplot() +
+      # dfKt0i0
+  geom_point(data=dfKt0i0 , aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt0i0, aes(x=NumAgR, y=Davg), fill="blue",
+        colour="darkblue", size=1) +
+      # dfKt0i4
+      geom_point(data=dfKt0i4, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt0i4, aes(x=NumAgR, y=Davg), fill="red",
+        colour="red", size=1) +
+      # dfKt0i8
+      geom_point(data=dfKt0i8, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt0i8, aes(x=NumAgR, y=Davg), fill="green",
+        colour="green", size=1) +
+  
+  scale_y_continuous(trans = "reverse", breaks = unique(results$position))
+print(plotkt0_1)
+```
+
+
+### K_t==1 (con todos valores de K_i)
+
+
+```{r}
+data.frame(dfKt1)
+df7 <- data.frame (dfKt1)
+df8 <- data.matrix (df7)
+library("ggplot2")
+plotk_t1 <-ggplot(data=df7, aes(x=NumAgR, y=kInit, fill=Davg)) +
+         scale_y_discrete(limits= c(0,8))+
+         geom_tile()
+print (plotk_t1)
+```
+
+```{r}
+data.frame(dfKt1)
+
+library("tidyverse")
+my_data <- as_tibble(dfKt1)
+
+my_data %>% filter(kInit == 0)
+dfKt1i0 <- my_data %>% filter(kInit == 0)
+
+my_data %>% filter(kInit == 4)
+dfKt1i4 <- my_data %>% filter(kInit == 4)
+
+my_data %>% filter(kInit == 8)
+dfKt1i8 <- my_data %>% filter(kInit == 8)
+
+library ("ggplot2")
+library("dplyr")
+plotkt1_1 <-ggplot() +
+      # dfKt1i0
+  geom_point(data=dfKt1i0 , aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt1i0, aes(x=NumAgR, y=Davg), fill="blue",
+        colour="darkblue", size=1) +
+      # dfKt1i4
+      geom_point(data=dfKt1i4, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt1i4, aes(x=NumAgR, y=Davg), fill="red",
+        colour="red", size=1) +
+      # dfKt1i8
+      geom_point(data=dfKt1i8, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt1i8, aes(x=NumAgR, y=Davg), fill="green",
+        colour="green", size=1) +
+  
+  scale_y_continuous(trans = "reverse", breaks = unique(results$position))
+print(plotkt1_1)
+
+```
+
+
+
+
+### K_t==2 (con todos valores de K_i)
+
+
+```{r}
+data.frame(dfKt2)
+df9 <- data.frame (dfKt2)
+df10 <- data.matrix (df9)
+library("ggplot2")
+plotk_t2 <-ggplot(data=df9, aes(x=NumAgR, y=kInit, fill=Davg)) +
+         scale_y_discrete(limits= c(0,8))+
+         geom_tile()
+print (plotk_t2)
+```
+
+
+
+
+
+```{r}
+data.frame(dfKt2)
+
+library("tidyverse")
+my_data <- as_tibble(dfKt2)
+
+my_data %>% filter(kInit == 0)
+dfKt2i0 <- my_data %>% filter(kInit == 0)
+
+my_data %>% filter(kInit == 4)
+dfKt2i4 <- my_data %>% filter(kInit == 4)
+
+my_data %>% filter(kInit == 8)
+dfKt2i8 <- my_data %>% filter(kInit == 8)
+
+library ("ggplot2")
+library("dplyr")
+plot3_2 <-ggplot() +
+      # dfKt2i0
+  geom_point(data=dfKt2i0 , aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt2i0, aes(x=NumAgR, y=Davg), fill="blue",
+        colour="darkblue", size=1) +
+      # dfKt2i4
+      geom_point(data=dfKt2i4, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt2i4, aes(x=NumAgR, y=Davg), fill="red",
+        colour="red", size=1) +
+      # dfKt0i8
+      geom_point(data=dfKt2i8, aes(x=NumAgR, y=Davg)) + 
+      geom_smooth(data=dfKt2i8, aes(x=NumAgR, y=Davg), fill="green",
+        colour="green", size=1) +
+  
+  scale_y_continuous(trans = "reverse", breaks = unique(results$position))
+print(plot3_2)
+```
