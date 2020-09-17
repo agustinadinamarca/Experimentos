@@ -49,7 +49,7 @@ def getNumR(S):
 # + número de ataques a procesar antes de que el agente comience a negociar
 # + número de ataques a procesar al recibir un argumento durante la negociación
 
-def exp():
+def experiment(it, kinit, kturn):
 
     fname = "metric-d_1.txt"
     
@@ -84,7 +84,7 @@ def exp():
     # Número de ataques a procesar al inicio
     AT1 = []
     #18
-    val1 = [0, 5, 10, 20, 30, 35]
+    val1 = kinit
 
     for k in val1:
         at1 = []
@@ -94,7 +94,7 @@ def exp():
     # Número de ataques a procesar durante la negociación
     AT2 = []
     #3
-    val2 = [0, 1, 3, 5]
+    val2 = kturn
     for k in val2:
         at2 = []
         for i in range(L):
@@ -150,7 +150,7 @@ def exp():
               tim = [] # lista de tiempos de ejecución
               di = [] # métrica d por ejecución
               
-              N = 100 # número de ejecuciones
+              N = it # número de ejecuciones
               for i in range(N):
                   np.random.shuffle(S)
                   i=0
