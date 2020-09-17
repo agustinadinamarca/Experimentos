@@ -84,7 +84,7 @@ def exp():
     # Número de ataques a procesar al inicio
     AT1 = []
     #18
-    val1 = [0]
+    val1 = [0, 5, 10, 20, 30, 35]
 
     for k in val1:
         at1 = []
