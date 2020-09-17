@@ -9,7 +9,6 @@ import agentPaf as ap
 import numpy as np
 import arguments as ar
 import read as red
-import gc
 
 def lenInt(setA, setB):
     count = 0
@@ -50,20 +49,20 @@ def getNumR(S):
 # + número de ataques a procesar antes de que el agente comience a negociar
 # + número de ataques a procesar al recibir un argumento durante la negociación
 
-def experiment(it, kinit, kturn):
+def exp():
 
-    fname = "metric-d.txt"
+    fname = "metric-d_1.txt"
     
-    agents = red.readFile() # acá vamos a modificar
+    agents = red.readFile()
 
     optima = get_optima()
 
-    
-                
-    
-
-    
     Ag = list(agents)
+    
+    del agents
+    
+    #print(Ag)
+    
     L = len(Ag)
     X = Ag[0]._Agent__X
     
@@ -85,7 +84,7 @@ def experiment(it, kinit, kturn):
     # Número de ataques a procesar al inicio
     AT1 = []
     #18
-    val1 = kinit
+    val1 = [0, 5, 10, 20, 30, 35]
 
     for k in val1:
         at1 = []
@@ -95,7 +94,7 @@ def experiment(it, kinit, kturn):
     # Número de ataques a procesar durante la negociación
     AT2 = []
     #3
-    val2 = kturn
+    val2 = [0, 1, 3, 5]
     for k in val2:
         at2 = []
         for i in range(L):
@@ -120,20 +119,25 @@ def experiment(it, kinit, kturn):
               c+=1
               pafAgents = set()
               #gc.collect()
-              #print(countat1, countat2, c)
+              print(countat1, countat2, c)
               D = [] # arreglo para guardar métrica d
               # introduzco aleatoriedad en el/los agentes con semántica/s R y RI
               #np.random.shuffle(S)
-              #print(S)
+              print(S)
               for i in range(L):
                   k = Ag[i]
+                  nn = ap.Agent(name=k.name, K=k._Agent__K, G=k._Agent__G, X=k._Agent__X, Ae=k._Agent__Ae, Ap=k._Agent__Ap, semanticRoRI=S[i], numAttacksToProcessInit=AT1[countat1][i], numAttacksToProcessByTurn=AT2[countat2][i])
                   #print(k._Agent__Ap)
-                  k.semanticRoRI= S[i]
-                  k.numAttacksToProcessInit=AT1[countat1][i]
-                  k.numAttacksToProcessByTurn=AT2[countat2][i]
-                  pafAgents.add(k)
-                  #del k
-              #print("Ok")
+                  #k.semanticRoRI= S[i]
+                  #k.numAttacksToProcessInit=AT1[countat1][i]
+                  #k.numAttacksToProcessByTurn=AT2[countat2][i]
+                  #print(k._Agent__accArgs)
+                  pafAgents.add(nn)
+                  #print(k.semanticRoRI,k.numAttacksToProcessInit, k.numAttacksToProcessByTurn)
+                  del k
+                  del nn
+              print("Ok")
+              #print(pafAgents, len(pafAgents))
               
               fileA = open(fname, "a+")
               #file1 = open("results_"+str("cRI-")+str(countQ)+".txt", "w")
@@ -146,12 +150,13 @@ def experiment(it, kinit, kturn):
               tim = [] # lista de tiempos de ejecución
               di = [] # métrica d por ejecución
               
-              N = it # número de ejecuciones
+              N = 100 # número de ejecuciones
               for i in range(N):
                   np.random.shuffle(S)
                   i=0
                   for w1 in pafAgents:
                     w1.sem = S[i]
+                    #print(w1.numAttacksToProcessByTurn)
                     i+=1
                     
                   t0 = time.perf_counter() # tiempo inicial
@@ -248,4 +253,3 @@ def experiment(it, kinit, kturn):
               del r
           countat1 += 1
       countat2 += 1
-
