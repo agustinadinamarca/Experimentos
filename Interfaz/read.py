@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import agentPaf as ag
+import agent as ag
 import arguments as ar
 
 def readFile():
@@ -109,16 +109,6 @@ def readFile():
                 else:
                     break
         #print(Ae)
-        PafAgents.add(ag.Agent(name=name, K=set(), G=G, X=alt, Ae=Ae, Ap=Ap, semanticRoRI="RI", numAttacksToProcessInit=0, numAttacksToProcessByTurn=0))
+        PafAgents.add(ag.Agent(name=name, K=set(), G=G, X=alt, Ae=Ae, Ap=Ap))
 
-    #print(PafAgents)
-
-    #for a in PafAgents:
-    #    print(a.name)
-    #    print(a._Agent__X)
-    #    print(a._Agent__G)
-    #    for k in a._Agent__Ap:
-    #        print(k.S, k.C, k.x, type(k))
-    #    for k in a._Agent__Ae:
-    #        print(k.H, k.h, type(k))
     return PafAgents
