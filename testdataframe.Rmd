@@ -1,0 +1,46 @@
+---
+title: "Metrics todos *k_i^ *k_t"
+output: html_notebook
+---
+
+```{r}
+
+k_i_data <-read.csv("metric-d_4.txt")
+library("tidyverse")
+k_i_data <-as_tibble("metric-d_4.txt")
+
+
+# K_t fijo a 0
+# my_data %>% filter(k_Init ==1 & k_Turn)
+# dfKi1 <- my_data %>% filter(k_Init ==1 | k_Turn)
+
+# Iniciamos librerias
+library ("ggplot2")
+library("dplyr")
+
+
+# Scatterplot FPR+FNR separados por nivel de K_i
+plot0011 <-ggplot() +
+      # dfKi1
+      geom_point( data= metric.d_4 , aes(x=AvFNR, y=AvFPR, colour=Davg)) + 
+      scale_fill_gradient (limits= c(0,2))+    
+      scale_colour_gradient(low = "red", high = "green")+
+      ggtitle("K_i* | k_t*") +
+      scale_y_continuous(limits = c(0, 1))+
+      scale_x_continuous(limits = c(0, 1))
+
+print(plot0011)
+
+
+# Scatterplot FPR+FNR separados por nivel de K_i
+plot0033 <- ggplot(data = metric.d_4, aes(AvFNR, AvFPR, fill=Davg)) +
+scale_fill_continuous()+
+geom_bin2d()
+print(plot0033)  
+
+# Scatterplot FPR+FNR separados por nivel de K_i
+p <- ggplot(metric.d_4, aes(AvFNR, AvFPR, fill=Davg))
+p <- p + stat_bin2d(bins = 70)
+p + scale_colour_gradient2(low = 'red', high = 'green')
+
+```
