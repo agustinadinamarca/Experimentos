@@ -1,0 +1,25 @@
+5
+#
+Ag4
+CON X1 g1 2 -c 0.98 3 -c -d 0.17 3 -d g1 0.39 
+CON X3 g2 2 d 0.11 3 b g2 0.87 3 d b 0.84 
+PRO X2 g2 2 b 0.29 3 -d g2 0.56 3 b -d 0.16 
+#
+Ag2
+CON X1 g1 3 -a d 0.1 2 -a 0.76 3 d g1 0.86 
+CON X2 g1 3 -e -a 0.81 3 -a g1 0.79 2 -e 0.26 
+PRO X3 g1 2 d 0.23 3 d a 0.5 3 a g1 0.4 
+#
+Ag3
+PRO X2 g1 3 -e g1 0.98 2 a 0.93 3 a -e 0.48 
+CON X3 g1 3 -a e 0.11 3 e g1 0.52 2 -a 0.64 
+CON X1 g1 3 d c 0.53 2 d 0.77 3 c g1 0.21 
+#
+Ag1
+#
+Ag5
+PRO X2 g1 2 -b 0.36 3 -b -a 0.21 3 -a g1 0.2 
+PRO X3 g1 3 -e -a 0.55 3 -a g1 0.8 2 -e 0.51 
+CON X1 g1 3 -b g1 0.23 3 c -b 0.25 2 c 0.17 
+CON X1 g1 2 -b 0.54 3 -b -a 0.21 3 -a g1 0.51 
+CON X2 g1 3 a g1 0.76 3 -d a 0.86 2 -d 0.76 

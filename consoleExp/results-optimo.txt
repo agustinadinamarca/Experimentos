@@ -1,0 +1,39 @@
+Results without Ignorance Relation
+Number of executions: 1000
+Number of agreements: 1000
+Optimal agreement: X3
+Average Time (1 execution):0.047772605180740356
+Turns vs # Agreements:
+['Ag1', '99']
+['Ag1Ag2', '95']
+['Ag1Ag2Ag3', '23']
+['Ag1Ag3', '104']
+['Ag1Ag3Ag2', '12']
+['Ag2', '102']
+['Ag2Ag1', '96']
+['Ag2Ag1Ag3', '19']
+['Ag2Ag3', '108']
+['Ag2Ag3Ag1', '18']
+['Ag3', '94']
+['Ag3Ag1', '121']
+['Ag3Ag1Ag2', '12']
+['Ag3Ag2', '86']
+['Ag3Ag2Ag1', '11']
+['X2', '403']
+Turns vs Agreements:
+Ag1 [99, {'X3'}]
+Ag1Ag2 [95, {'X3'}]
+Ag1Ag2Ag3 [23, {'X3'}]
+Ag1Ag3 [104, {'X3'}]
+Ag1Ag3Ag2 [12, {'X3'}]
+Ag2 [102, {'X3'}]
+Ag2Ag1 [96, {'X3'}]
+Ag2Ag1Ag3 [19, {'X3'}]
+Ag2Ag3 [108, {'X3'}]
+Ag2Ag3Ag1 [18, {'X3'}]
+Ag3 [94, {'X3'}]
+Ag3Ag1 [121, {'X3'}]
+Ag3Ag1Ag2 [12, {'X3'}]
+Ag3Ag2 [86, {'X3'}]
+Ag3Ag2Ag1 [11, {'X3'}]
+X2 [0, set()]

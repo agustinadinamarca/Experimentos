@@ -1,0 +1,51 @@
+
+Ag4
+
+A
+set()
+U
+{(<arguments.ArgEp object at 0x7f26a886f490>, <arguments.ArgEp object at 0x7f26a886f450>)}
+SA
+set()
+SU
+{(<arguments.ArgEp object at 0x7f26a886f490>, <arguments.ArgEp object at 0x7f26a886f450>)}
+Ag2
+
+A
+{(<arguments.ArgEp object at 0x7f26a886f390>, <arguments.ArgCON object at 0x7f26a8860e10>)}
+U
+{(<arguments.ArgEp object at 0x7f26a886f310>, <arguments.ArgEp object at 0x7f26a886f390>), (<arguments.ArgEp object at 0x7f26a886f390>, <arguments.ArgEp object at 0x7f26a886f310>)}
+SA
+{(<arguments.ArgEp object at 0x7f26a886f390>, <arguments.ArgCON object at 0x7f26a8860e10>)}
+SU
+{(<arguments.ArgEp object at 0x7f26a886f390>, <arguments.ArgEp object at 0x7f26a886f310>)}
+Ag3
+
+A
+{(<arguments.ArgEp object at 0x7f26a886f350>, <arguments.ArgPRO object at 0x7f26a8860ed0>)}
+U
+set()
+SA
+set()
+SU
+set()
+Ag1
+
+A
+{(<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgCON object at 0x7f26a8860d10>), (<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgCON object at 0x7f26a8860d50>), (<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgPRO object at 0x7f26a8860d90>)}
+U
+{(<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgEp object at 0x7f26a886f210>)}
+SA
+{(<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgCON object at 0x7f26a8860d10>), (<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgCON object at 0x7f26a8860d50>), (<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgPRO object at 0x7f26a8860d90>)}
+SU
+{(<arguments.ArgEp object at 0x7f26a886f2d0>, <arguments.ArgEp object at 0x7f26a886f210>)}
+Ag5
+
+A
+set()
+U
+set()
+SA
+set()
+SU
+set()
