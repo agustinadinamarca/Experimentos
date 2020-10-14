@@ -5,19 +5,10 @@ output: html_notebook
 
 ```{r}
 
-k_i_data <- read.csv("metric-d_4.txt")
+k_i_data <-read.csv("metric-d_4.txt")
 library("tidyverse")
-k_i_data <- as_tibble("metric-d_4.txt")
+k_i_data <-as_tibble("metric-d_4.txt")
 
-# Filtramos por nivel de K_i
-
-# my_data %>% filter(k_Init ==10)
-dfKi1 <- my_data %>% filter(k_Init ==30)
-
-# Filtramos por nivel de K_t (en este caso está fijo a ==0)
-
-
-#Filtramos combinando un K_i con K_t fijo
 
 # K_t fijo a 0
 # my_data %>% filter(k_Init ==1 & k_Turn)
@@ -31,11 +22,12 @@ library("dplyr")
 # Scatterplot FPR+FNR separados por nivel de K_i
 plot0011 <-ggplot() +
       # dfKi1
-      geom_point( data=my_data , aes(x=AvFNR, y=AvFPR, colour=Davg)) + 
+      geom_point( data= metric.d_4 , aes(x=AvFNR, y=AvFPR, colour=Davg)) + 
+      scale_fill_gradient (limits= c(0,2))+    
       scale_colour_gradient(low = "red", high = "green")+
       ggtitle("K_i* | k_t*") +
       scale_y_continuous(limits = c(0, 1))+
-  scale_x_continuous(limits = c(0, 1))
+      scale_x_continuous(limits = c(0, 1))
 
 print(plot0011)
 
@@ -52,4 +44,3 @@ p <- p + stat_bin2d(bins = 70)
 p + scale_colour_gradient2(low = 'red', high = 'green')
 
 ```
-
