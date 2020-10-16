@@ -17,6 +17,8 @@ k_i_data <-as_tibble("metric-d_4.txt")
 # Iniciamos librerias
 library ("ggplot2")
 library("dplyr")
+library(gridExtra)
+
 
 
 # Scatterplot FPR+FNR separados por nivel de K_i
@@ -43,4 +45,20 @@ p <- ggplot(metric.d_4, aes(AvFNR, AvFPR, fill=Davg))
 p <- p + stat_bin2d(bins = 70)
 p + scale_colour_gradient2(low = 'red', high = 'green')
 
+
+# Contrastando las métricas AvFPR y FP / AvFNR y FN
+
+p <-ggplot(metric.d_checkFPFN,  aes (x=AvFNR))+
+     geom_line(aes(y = AvFPR), color = "darkred") + 
+     geom_line(aes(y = FP), color="steelblue", linetype="twodash")+
+     ylab("AvFPR+FP") # for the y axis label
+print (p)
+
+p1 <-ggplot(metric.d_checkFPFN,  aes (x=AvFPR))+
+     geom_line(aes(y = AvFNR), color = "darkred") + 
+     geom_line(aes(y = FN), color="steelblue", linetype="twodash")+
+     ylab("AvFNR+FN") # for the y axis label
+print (p1)
+
+grid.arrange(p, p1, ncol = 2)
 ```
