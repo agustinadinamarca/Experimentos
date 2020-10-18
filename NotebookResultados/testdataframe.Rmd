@@ -25,8 +25,7 @@ library(gridExtra)
 plot0011 <-ggplot() +
       # dfKi1
       geom_point( data= metric.d_4 , aes(x=AvFNR, y=AvFPR, colour=Davg)) + 
-      scale_fill_gradient (limits= c(0,2))+    
-      scale_colour_gradient(low = "red", high = "green")+
+      scale_colour_gradient(low = "red", high = "green", limits= c(0,2) )+
       ggtitle("K_i* | k_t*") +
       scale_y_continuous(limits = c(0, 1))+
       scale_x_continuous(limits = c(0, 1))
