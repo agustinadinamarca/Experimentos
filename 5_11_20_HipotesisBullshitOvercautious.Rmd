@@ -1,0 +1,76 @@
+---
+title: "Bullshit vs. Overcautiousness: métrica uB vs. uO"
+output: html_notebook
+---
+
+## Hipótesis
+
+Estudio por simulación sobre la relación entre cautelosidad y calidad de los consensos en el contexto de los procesos de toma de decisiones colectivos basados en argumentación con resource bounded agents:
+
+**Desarrollo de la hipótesis: **
+
+* https://docs.google.com/document/d/1n4ig4HQdxnBzztMjw3eq8KfVmEn8kdPPv3JxE4CP8bA/edit?usp=sharing
+
+
+**Puntos principales:**
+
+*  Bullshit afecta más negativamente a la calidad de los consensos que Overcautious aunque Overcautious puede hacer que se pierdan perlitas muy valiosas. 
+
+*  Las métricas para modelar bullshit(uB) y overcautious(uO) se basan en contar cuantas utterances (u) falsas se emiten en cada diálogo y posteriormente comparar cual de estas utterancias falsas (uB o UO) afectan más a la calidad de las decisiones colectivas
+
+* Finamente pensar en cómo se podría revertir este efecto de la RB a través de la confianza (para limitar uB o para que no se omitan uO)
+
+
+## 1. Modelo/problema  para demostrar la hipótesis
+
+Para modelar el problema se ejecuta primero una simulación de diálogo sin Resource Boundedness para poder inferir cual es la decisión óptima. A continuación se ejecuta el mismo diálogo con agentes RB y se compara la decisión alcanzada con el diálogo sin RB.
+
+Existen 3 valores para medir la calidad de la decisión en uncontexto de Resource Boundedness: 0=no consenso, 1= consenso subóptimo (i..e, diferente del obtenido sin RB), 2= consenso óptimo (i.e., igual que el obtenido sin RB).
+
+En la sección **Modelos de diálogos** se describe más detalladamente las diferencias entre los dos modelos de diálogos y las métricas utilizadas: uB (utterance Bullshit) y uO (utterance Overcautious)
+
+
+## Parámetros: 
+
+*  **Agents**= número de agentes
+*  **MaxAp** = max. argumentos prácticos por agente
+*  **MaxAe**= max. argumentos epistémicos por agente
+*  **NumX**= max. goals por agente
+*  **NumG**= número de alternativas a negociar 
+* **O_t**: (Orden de turnos en el dialogo) es aleatorio, se corre mil veces y aparecen todas posibles configuraciones de turnos. podemos trazar la posición..
+* **O_p**: (Orden de preferencia de speech acts validos p/c/agente en c/turno): en cada turno del diálogo el agente debe elegir entre los diferentes speech acts posible ej., argue o challenge. Se corre mil veces para tener todas las posibles configuraciones.
+* **K_i**: (Nivel de Resource boundedness inicial):numero de ataques que puede procesar el agente de su estado inicial.
+* **K_T**: (Nivel de Resource Boundedness por turno): número de ataques que puede procesar el agente de su base de conocimineto inicial (i..e, antes de empezar el diálogo).
+* **N**: Número de agentes con semántica R (bullshiters).
+* **N_I**: Número de agentes con Semántica RI (overcautious).
+* **A_i**: (Distribución de argumentos que cada agente tiene). Por ahora se genera aleatoreamiente y los agentes no comparten ningún argumento. Este parámetro sirve para analizar situaciones donde los agentes comparten algunos argumentos en sus bases de conocimineto antes de empezar el diálogo.
+* **P_i**: (Configuración de preferencias). Por ahora es una configuración aleatória y puede ser que los agentes compartan algunos goals.
+
+
+## Modelos de diálogos
+
+
+## 1. Modelo de diálogo sin antrocomplejidad
+
+El modelo de diálogo es cauteloso bajo un AF (i.e., sin Resource Boundedness) es decir: sólo emite argumentos verdaderos (i.e., que son aceptables) y nunca emite bulshit (i.e., argumentos no aceptables). Además, a parte de no emitir nunca bullshit, tampoco deja de emitir argumentos verdaderos (las perlitas), por lo que tampoco es sobrecauteloso.
+
+* **Definición:** Llamamos TAF* o global argumentation framework al argumentation framework no distribuido y sin resource-boundeness.
+      i.e.,al conjunto completo de argumentos disponible.
+*  **Definición:** Llamamos TAF cuando nos referimos al argumentation framework local de cierto agente sin resource-boundencess. i.e., al       conjunto individual de argumentos disponible.
+
+## 2. Modelo de diálogo con antrocomplejidad (PAFs)
+
+Para introducir la antrocomplejidad (desde una perspectiva de la resource boundedness), en lugar de usar el framework de argumentación de Dung (AF) se hace uso de PAFs, lo que permite introducir incertidumbre. En este contexto en función de la semántica utilizada (R o RI) el modelo de diálogo permite que los agentes puedan tener una actitud bullshiter (i.e., que emitan argumentos que no serían aceptables en un TAF+) o sobrecautelosa (i.e., que dejen de emitir argumentos verdaderos que no se omitirían en un TAF+=> las perlitas).
+
+En este contexto dado un argumento U de cierto agente, decimos que U es una uterancia cuando ha sido emitido por un Argue(U) en el PAF, i.e., es aceptable por alguna de las semánticas de PAF ( i.e., R o RI).
+
+Esta uterancia puede definirse como:
+
+*  **Bullshit:** "cuando el PAF local acepta U pero en realidad no es aceptable (en el TAF+)", es decir, si U ha sido emitido porque fue seleccionado al azar por algún agente en su turno y lo aceptó para emitirlo porque operaba con semántica R de PAF.  Esta U-bullshit se cuenta una sola vez por dialogo=> i.e., queremos estudiar cómo el número de U-bullshits e U-sonbrecautelosas afectan a la calidad de las decisiones colectivas, para ello listaremos el número de U-B y U-S que aparecen en cada diálogo y mediremos como estas afectan a la calidad de la decisión.
+
+*  **Global Overcautious/Wrongfullycautious:** "cuando U es aceptable de acuerdo a TAF+ pero el PAF nunca tuvo la oportunidad de elegirlo", es decir, en ningún turno, de ningún agente durante el diálogo con resource-boundeness esta U ha sido aceptable por el PAF (debido a la semántica RI) del agente en ese turno.
+
+*  **Local Overcautious/Wrongfullycautious:** "cuando U ha sido emitido por algun TAF pero el PAF nunca tuvo la oportunidad de elegirlo", es decir, si U ha sido emitido en un dialogo sin resource boundedness por al menos un agente, osea, ha sido seleccionado y era aceptable por el TAF; pero en ningún turno, de ningún agente durante el diálogo con resource-boundeness ha sido aceptable por el PAF (debido a la semántica RI) del agente en ese turno.
+
+
+```
