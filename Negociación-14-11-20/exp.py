@@ -22,12 +22,22 @@ global N # cantidad de ejecuciones de negociación (agentes con TAF)
 global M # numero de ejecuciones de negociacion (agentes con PAF)
 global val1 # valor de ataques y no ataques a determinar inicialmente
 global val2 #  valor de ataques y no ataques a determinar por turnos
+global numMaxGoals # numero max de goals por agente
+global numAlt # numero de alternativas
+global numMaxAp # numero max de argumentos practicos por agente
+global numMaxEp # numero max de argumentos practicos por agente
+global attacksDensity # densidad de ataques por agente
 
 numAg = 5 # número de agentes
 N = 1 # cantidad de ejecuciones de negociación (agentes con TAF)
 M = 1 # numero de ejecuciones de negociacion (agentes con PAF)
 val1= [5] # valor de ataques y no ataques a determinar inicialmente
 val2 = [2] #  valor de ataques y no ataques a determinar por turnos
+numMaxGoals=2
+numAlt=3
+numMaxAp=5
+numMaxEp=3
+attacksDensity=0.4
 ################################
 	
 def exp():
@@ -37,7 +47,7 @@ def exp():
 
 	while sol != 1:
 		t0 = perf_counter()
-		agents = createAgents(numAg=numAg, numMaxGoals=2, numAlt=3, numMaxAp=5, numMaxEp=3, attacksDensity=0.4)
+		agents = createAgents(numAg, numMaxGoals, numAlt, numMaxAp, numMaxEp, attacksDensity)
 		tf = perf_counter()
 		print("Example creation:", tf - t0, "s")
 		
