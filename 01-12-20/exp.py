@@ -129,7 +129,7 @@ def exp():
 		else:
 			optima = None
 			
-		sol = 1 ## SACAR!!!
+		#sol = 1 ## SACAR!!!
 
 	file1 = open("results-optimo.txt", "w")
 	file1.write("Results without Ignorance Relation\n")
