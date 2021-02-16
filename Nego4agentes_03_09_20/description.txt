@@ -1,1 +1,0 @@
-Se corrió un experiento en la cual negocian 4 agentes. Se varió k inicial y k turnos.
